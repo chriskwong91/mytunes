@@ -1,4 +1,4 @@
-describe('SongQueueView', function() {
+describe('SongQueueEntryView', function() {
   var view, fakeSongs;
 
   beforeEach(function() {
@@ -33,18 +33,6 @@ describe('SongQueueView', function() {
     });
     view.collection.pop();
     expect(view.render).to.have.been.called;
-  });
-
-  it('should remove a song when a dequeue event is fired', function () {
-    view = new SongQueueView({collection: fakeSongs});
-    view.collection.at(0).dequeue();
-    expect(view.collection.length).to.equal(1);
-  });
-
-  it('should dequeue when a click event is fired', function () {
-    view = new SongQueueView({collection: fakeSongs});
-    view.collection.at(0).trigger('click', view.collection.at(0));
-    expect(view.collection.length).to.equal(1);
   });
 
 });
