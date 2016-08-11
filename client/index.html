@@ -6,7 +6,7 @@
     <script src="bower_components/jquery/jquery.min.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
     <script src="bower_components/backbone/backbone.js"></script>
-    <script src="env/config.js"</script>
+    <script src="env/config.js"></script>
     <script src="data/data.js"></script>
 
     <script src="models/SongModel.js"></script>
@@ -25,6 +25,9 @@
       $(function() {
         // set up model objects
         var library = new Songs();
+        // library.url ='https://api.parse.com/1/classes/songs';
+        // library.fetch({reset:true});
+
         var app = new AppModel({library: library});
 
         // build a view for the top level of the whole app

@@ -3,23 +3,15 @@ var LibraryView = Backbone.View.extend({
 
   tagName: 'table',
 
-  events: {
-    'fetched': function(event) {
-      console.log('rendered');
-      this.render();
-    }
-  },
-
   initialize: function() {
     this.render();
 
-    this.collection.on('change', function(event) {
-      console.log('rendered');
+    this.collection.on('reset', function(event) {
       this.render();
     }, this);
 
   },
-  
+
 
   render: function() {
     // to preserve event handlers on child nodes, we must call .detach() on them before overwriting with .html()
