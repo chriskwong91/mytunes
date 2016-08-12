@@ -11,6 +11,11 @@ var SongQueueView = Backbone.View.extend({
       this.render();
     }, this);
 
+    Backbone.globalEvents.on('empty', function(event) {
+      this.collection.emptyQueue();
+      this.render();
+    }, this);
+
     // renders individual songQueueEntryView
     _.each(this.collection, function(songModel, key) {
       var entryView = new SongQueueEntryView( { model: this.collection.at(key) } );
@@ -24,7 +29,7 @@ var SongQueueView = Backbone.View.extend({
     // see http://api.jquery.com/detach/
     this.$el.children().detach();
 
-    this.$el.html('<th>Queue</th>').append(
+    this.$el.html('<th class=queue>Queue</th>').append(
       this.collection.map(function(song) { 
 
         var newSongView = new SongQueueEntryView({model: song});

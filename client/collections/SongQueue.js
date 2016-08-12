@@ -3,6 +3,8 @@ var SongQueue = Backbone.Collection.extend({
 
   model: SongModel,
 
+  makingNewPlaylist: false,
+
   initialize: function() {
 
     this.on('dequeue', function(event) {
@@ -21,9 +23,21 @@ var SongQueue = Backbone.Collection.extend({
       }
     }, this);
 
+    Backbone.globalEvents.on('empty', function(event) {
+      this.makingNewPlaylist = true;
+      
+    }, this);
+
+    Backbone.globalEvents.on('saved', function(event) {
+      this.makingNewPlaylist = false;
+
+    }, this);
+
     //when song is added play first song
     this.on('add', function(event) {
-      if (this.length === 1) { this.playFirst(); }
+      if (this.length === 1 && this.makingNewPlaylist) { 
+        this.playFirst(); 
+      }
     }, this);
   },
   
@@ -33,6 +47,12 @@ var SongQueue = Backbone.Collection.extend({
     //} else {
       //this.trigger('ended', this);
     //}
+  }, 
+
+  emptyQueue: function() {
+    while (this.length > 0) {
+      this.pop();
+    }
   }
 
 });

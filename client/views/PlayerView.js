@@ -13,9 +13,7 @@ var PlayerView = Backbone.View.extend({
 
   initialize: function() {
 
-    // this.on('play', function(event) {
-    //   setSong(event);
-    // }, this);
+
   },
 
   setSong: function(song) {
